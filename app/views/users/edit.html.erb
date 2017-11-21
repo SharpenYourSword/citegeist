@@ -1,0 +1,23 @@
+<% title "Edit User" %>
+
+<% actions do %>
+	<%= link_to "Change Password", change_password_begin_user_path(@user) %>
+<% end %>
+
+<%= form_for @user do |f| %>
+	<%= display_field "ID", f.object.id %>
+	<%= display_field "Email", f.object.email %>
+
+	<% if has_permission?(:user) %>
+		<% User.available_permissions.each do |perm| %>
+			<div class="checkbox">
+				<label>
+					<%= check_box_tag "permissions[]", perm[1], @user.has_permission_for_group?(current_group, perm[1]) %> 
+					<%= perm[0] %>
+				</label>
+			</div>
+		<% end %>
+
+		<%= submit_tag "Save", :class => "btn btn-primary" %>
+	<% end %>
+<% end %>

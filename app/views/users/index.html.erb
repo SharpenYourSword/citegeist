@@ -1,0 +1,27 @@
+<% title "Users" %>
+
+<% actions do %>
+	<%= link_to "New User", [:new, :user] %>
+<% end %>
+
+<% users = current_group.users %>
+<table class="table">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Username</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% users.active.email_order.each do |u| %>
+			<tr>
+				<td><%= link_to u.display_identifier, [:edit, u], :class => "idlink" %></td>
+				<td><%= u.email %></td>
+				<td><%= link_to glyph("trash", "Delete"), u, :method => :delete, :data => { :confirm => "Are you sure you want to delete this user?" } %></td>
+			</tr>
+		<% end %>
+		<% if users.empty? %>
+			<tr><td colspan="2">No users available for this group.</td></tr>
+		<% end %>
+	</tbody>
+</table>

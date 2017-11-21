@@ -1,0 +1,18 @@
+<% title "New User" %>
+
+<% actions do %>
+	<%= link_to "Show All Users", users_path %>
+<% end %>
+
+<%= form_for User.new do |f| %>
+	<%= simple_field "Email", f, :email %>
+	<div class="form-group">
+		<label>Password</label>
+		<%= f.password_field :password, :class => "form-control" %>
+	</div>
+	<div class="form-group">
+		<label>Confirm Password</label>
+		<%= f.password_field :password_confirmation, :class => "form-control" %>
+	</div>
+	<%= submit_tag "Save", :class => "btn btn-primary" %>
+<% end %>

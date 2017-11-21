@@ -1,14 +1,76 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Citegeist</title>
-    <%= csrf_meta_tags %>
+<head>
+	<%= csrf_meta_tags %>
+	<%= javascript_include_tag 'application' %>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+	<title>Event Manager</title>
 
-  <body>
-    <%= yield %>
-  </body>
+	<%= stylesheet_link_tag 'application', media: 'all' %>
+</head>
+
+<body>
+	<% if current_user.present? %>
+		<nav class="navbar navbar-inverse navbar-static-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<%= link_to "Citegeist Dashboard", dashboard_path, :class => "navbar-brand" %>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<% if current_group.present? %>
+							<li><%= link_to "Dashboard", dashboard_path %></li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_group.name if current_group.present? %> <span class="caret"></span></a>
+
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><%= link_to "My Account", [:edit, current_user] %></li>
+									<%= content_tag :li, link_to("Users", users_path) if has_permission?(:user) %>
+								</ul>
+							</li>
+						<% end %>
+						<li class="divider"></li>
+						<li class="divider"></li>
+						<li><%= link_to "Logout", session_path, method: :delete %></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	<% end %>
+
+	<div class="container-fluid">
+		<%= render 'shared/flash_messages' %>
+
+		<% if content_for? :header_logo %>
+			<div class="header-image"><%= yield :header_logo %></div>
+		<% end %>
+
+		<%= show_env_if_testing %>
+
+		<%= content_tag :h1, "#{yield :title}&nbsp;<small class='lead'>#{yield :subtitle if content_for?(:subtitle)}</small>".html_safe, class: "page-header #{yield(:title_class) if content_for?(:title_class)}" if content_for?(:title) %>
+
+		<%= content_tag :div, (yield :actions), class: "actions text-right" if content_for?(:actions) %>
+
+		<div class="row">
+			<div class="<%= content_for?(:sidebar) ? 'col-lg-8' : 'col-lg-12' %>">
+				<%= yield %>
+			</div>
+			<% if content_for?(:sidebar) %>
+				<div class="col-lg-4">
+					<%= yield :sidebar %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+
+	<%= yield :scripts %>
+</body>
 </html>
