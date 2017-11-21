@@ -6,7 +6,6 @@ source 'https://rubygems.org'
 #end
 
 gem 'kaminari'
-gem 'pg'
 gem 'bcrypt'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

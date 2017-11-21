@@ -3,6 +3,7 @@ lock "~> 3.10.0"
 
 set :application, "citegeist"
 set :repo_url, "https://github.com/johnnyb/citegeist.git"
+set :rvm_ruby_version, '2.3.5@citegeist'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
