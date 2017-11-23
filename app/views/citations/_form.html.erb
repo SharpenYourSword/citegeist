@@ -1,0 +1,5 @@
+<%# PARAMETERS - f %>
+
+<% [:booktitle, :edition, :journal, :title, :authors, :year, :volume, :issue, :pages, :publisher, :institution, :month, :address, :doi, :pubmed, :url, :note, :editors].each do |fld| %>
+	<%= simple_field(fld.to_s.titleize, f, fld) %>
+<% end %>

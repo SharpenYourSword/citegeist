@@ -1,0 +1,8 @@
+<% page_title "Edit Citation" %>
+
+<%= form_for @citation do |f| %>
+	<%= render :partial => "form", :locals => { :f => f } %>
+			
+
+	<%= submit_tag "Save", :class => "btn btn-primary" %>
+<% end %>

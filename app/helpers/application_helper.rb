@@ -29,7 +29,7 @@ module ApplicationHelper
 	  end
 	end
 
-	def title text, opts = {}
+	def page_title text, opts = {}
 		content_for(:title) { text }
 		if opts[:class]
 			content_for(:title_class){opts[:class]}

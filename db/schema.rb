@@ -10,11 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170914153102) do
+ActiveRecord::Schema.define(version: 20171123043325) do
+
+  create_table "citations", force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "user_id"
+    t.text "document_type"
+    t.text "booktitle"
+    t.text "edition"
+    t.text "journal"
+    t.text "title"
+    t.text "authors"
+    t.text "year"
+    t.text "volume"
+    t.text "issue"
+    t.text "pages"
+    t.text "publisher"
+    t.text "institution"
+    t.text "month"
+    t.text "address"
+    t.text "doi"
+    t.text "pubmed"
+    t.text "url"
+    t.text "note"
+    t.text "editors"
+    t.text "notation_html"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tagged_items", force: :cascade do |t|
+    t.integer "taggable_id"
+    t.string "taggable_type"
+    t.integer "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "parent_tag_id"
+    t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,30 @@
+<% page_title "Citations" %>
+
+<%= link_to "New Citation", new_citation_path %>
+
+<table class="table">
+	<tr>
+		<th>Year</th>
+		<th>Author</th>
+		<th>Title</th>
+		<th></th>
+	</tr>
+	<% if @citations.empty? %>
+		<tr>
+			<td colspan="4">
+				No citations available.	
+			</td>
+		</tr>
+	<% end %>
+	<% @citations.each do |cit| %>
+		<tr>
+			<td><%= cit.year %></td>
+			<td><%= cit.authors_short %></td>
+			<td><%= cit.main_title %></td>
+			<td>
+				<%= link_to glyph(:edit, "Edit"), [:edit, cit] %>
+				<%= link_to glyph(:trash, "Delete"), cit, :data => { :confirm => "Are you sure you want to delete this citation?" }, :method => :delete %>
+			</td>
+		</tr>
+	<% end %>
+</table>

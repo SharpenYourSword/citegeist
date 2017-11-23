@@ -10,6 +10,7 @@ set :rvm_ruby_version, '2.3.5@citegeist'
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/blythi/citegeist"
+set :passenger_restart_with_touch, true
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -23,7 +24,7 @@ set :deploy_to, "/home/blythi/citegeist"
 
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml", "config/secrets.yml"
-# append :linked_files, "db/production.sqlite3", "config/secrets.yml"
+append :linked_files, "db/production.sqlite3", "config/secrets.yml"
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"

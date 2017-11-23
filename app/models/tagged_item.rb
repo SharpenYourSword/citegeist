@@ -1,0 +1,2 @@
+class TaggedItem < ApplicationRecord
+end
